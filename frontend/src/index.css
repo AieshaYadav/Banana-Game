@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .font-arcade {
+    font-family: 'Fredoka', cursive, sans-serif;
+  }
+}
+
+/* Custom interactive animations */
+@keyframes shake-extreme {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  10% { transform: translateX(-12px) rotate(-2deg); }
+  20% { transform: translateX(12px) rotate(2deg); }
+  30% { transform: translateX(-10px) rotate(-1.5deg); }
+  40% { transform: translateX(10px) rotate(1.5deg); }
+  50% { transform: translateX(-6px) rotate(-1deg); }
+  60% { transform: translateX(6px) rotate(1deg); }
+  70% { transform: translateX(-3px) rotate(-0.5deg); }
+  80% { transform: translateX(3px) rotate(0.5deg); }
+}
+
+.shake-mistake {
+  animation: shake-extreme 0.65s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+/* Glassmorphism effects */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #eab308;
+}

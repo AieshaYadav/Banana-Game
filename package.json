@@ -1,0 +1,13 @@
+{
+  "name": "banana-game-enterprise-suite",
+  "version": "1.0.0",
+  "description": "CIS046-3 Software For Enterprise - Banana Game Full Stack System",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "init:db": "cd backend && npm run db:init"
+  },
+  "keywords": ["banana-game", "enterprise", "react", "express", "mysql"]
+}
+
