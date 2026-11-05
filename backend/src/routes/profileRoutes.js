@@ -9,3 +9,4 @@ router.get('/', (req, res) => profileController.getProfile(req, res));
 router.put('/avatar', (req, res) => profileController.updateAvatar(req, res));
 
 module.exports = router;
+

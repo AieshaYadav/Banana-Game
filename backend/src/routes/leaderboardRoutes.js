@@ -7,3 +7,4 @@ router.get('/top-scores', (req, res) => leaderboardController.getTopScorers(req,
 router.get('/accuracy', (req, res) => leaderboardController.getTopAccuracy(req, res));
 
 module.exports = router;
+

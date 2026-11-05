@@ -137,3 +137,4 @@ export default function HintModal({ isOpen, onClose, hints, hintLevel, onRequest
     </div>
   );
 }
+

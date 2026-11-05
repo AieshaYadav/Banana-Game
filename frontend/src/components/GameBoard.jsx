@@ -536,3 +536,4 @@ export default function GameBoard({ onScoreUpdate, liveScore, setLiveScore, stre
     </div>
   );
 }
+

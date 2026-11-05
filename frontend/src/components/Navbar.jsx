@@ -156,3 +156,4 @@ export default function Navbar({ activeTab, setActiveTab, liveScore, streak }) {
     </nav>
   );
 }
+

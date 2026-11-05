@@ -74,3 +74,4 @@ export const profileApi = {
       body: JSON.stringify({ avatar })
     })
 };
+

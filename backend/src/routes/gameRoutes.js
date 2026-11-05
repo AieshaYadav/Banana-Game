@@ -16,3 +16,4 @@ router.post('/hint', (req, res) => gameController.requestHint(req, res));
 router.post('/submit', (req, res) => gameController.submitAnswer(req, res));
 
 module.exports = router;
+

@@ -81,3 +81,4 @@ class BananaService {
 }
 
 module.exports = new BananaService();
+

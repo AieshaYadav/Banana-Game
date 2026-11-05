@@ -64,3 +64,4 @@ CREATE TABLE IF NOT EXISTS match_history (
   CONSTRAINT fk_match_history_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   INDEX idx_user_history (user_id, played_at DESC)
 ) ENGINE=InnoDB;
+

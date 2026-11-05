@@ -108,3 +108,4 @@ class HintService {
 }
 
 module.exports = new HintService();
+

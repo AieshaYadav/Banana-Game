@@ -12,3 +12,4 @@ router.get('/me', authenticateToken, (req, res) => authController.getMe(req, res
 router.put('/profile', authenticateToken, (req, res) => authController.updateProfile(req, res));
 
 module.exports = router;
+
