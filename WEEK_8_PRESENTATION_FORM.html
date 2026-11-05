@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CIS046-3 Week 8 Presentation Sign-Off Form</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.35;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 14pt;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+    .header-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+      font-size: 10.5pt;
+    }
+    .header-table td {
+      padding: 3px 0;
+    }
+    .notice {
+      font-size: 8.5pt;
+      font-style: italic;
+      color: #333;
+      margin-bottom: 14px;
+      line-height: 1.3;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ccc;
+    }
+    .section-title {
+      font-size: 11pt;
+      font-weight: bold;
+      margin: 10px 0 2px 0;
+      color: #000;
+    }
+    .prompt {
+      font-size: 9pt;
+      font-style: italic;
+      color: #444;
+      margin-bottom: 4px;
+    }
+    .answer {
+      font-size: 9pt;
+      line-height: 1.35;
+      text-align: justify;
+      margin-bottom: 8px;
+    }
+    ol, ul {
+      margin: 2px 0 4px 18px;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 1px;
+    }
+    .print-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      padding: 10px 18px;
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    @media print {
+      .print-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">🖨️ Print Form (A4)</button>
+
+  <h1>CIS046-3 Software for Enterprise – AY 26/27</h1>
+
+  <table class="header-table">
+    <tr>
+      <td style="width: 55%;"><strong>Student Name:</strong> ________________________________</td>
+      <td><strong>Student Number:</strong> ____________________</td>
+    </tr>
+    <tr>
+      <td><strong>Student Signature:</strong> ___________________________</td>
+      <td><strong>Date:</strong> November 2026 (Week 8)</td>
+    </tr>
+  </table>
+
+  <div class="notice">
+    Please answer the questions below, print this form and bring it to the presentation where it will be checked against reality and signed off by the tutor. Once signed off, scan this form and submit on BREO with all other deliverables (video, code). At this stage, Week 8, (at least) a working prototype should be presented plus some ideas on how to continue with the development.
+  </div>
+
+  <div class="section-title">Version Control</div>
+  <div class="prompt">How did you develop your code (e.g., what features have ben added after first version)?</div>
+  <div class="answer">
+    I developed the application in a decoupled multi-tier architecture (React client, Node/Express gateway, MySQL database) tracked under Git on GitHub (<code>AieshaYadav/Banana-Game</code>). I utilized semantic commit messages and isolated feature branches (<code>main</code>, <code>develop</code>, <code>feature/anti-cheat-proxy</code>) with a tagged release <code>v1.0.0</code>. After the initial prototype connecting to the external puzzle API, I iteratively implemented:
+    (1) An anti-cheat proxy to intercept the API and withhold the raw solution from the client to prevent data leaks.
+    (2) A progressive 3-step hint engine with tiered point penalties (-15, -25, -35 pts).
+    (3) Mistake feedback coupling visual CSS keyframe shake animations with the HTML5 Web Vibration API.
+    (4) Procedural Web Audio API sound synthesis (eliminating static audio files) and streak combo multipliers.
+    (5) Persistent MySQL 8.0 schema for real-time dynamic leaderboard aggregation and player audit history.
+  </div>
+
+  <div class="section-title">Event Driven Architectures</div>
+  <div class="prompt">What in your code triggers events (e.g., GUI, buttons, timeout …)?</div>
+  <div class="answer">
+    Events are managed across both synchronous client interfaces and asynchronous server runtimes:
+    (a) <strong>Client GUI & Keystroke Events:</strong> Click handlers on the interactive 0–9 keypad; a global <code>keydown</code> listener mapping physical number keys (<code>0</code>–<code>9</code>), <code>Enter</code> (submission), and <code>H</code> (hint modal).
+    (b) <strong>Temporal Interval Events:</strong> A 30-second countdown timer implemented via <code>setInterval</code> firing state ticks every 1000ms. If the timer reaches 0, it dispatches an automatic timeout mistake event.
+    (c) <strong>Sensory Feedback Events:</strong> Mistake events toggle CSS <code>@keyframes shake-mistake</code> and trigger physical pulses via <code>navigator.vibrate([180, 80, 220])</code>; button interactions trigger real-time sine/sawtooth sound waves via <code>AudioContext</code> oscillators.
+    (d) <strong>Server Asynchronous Events:</strong> Node.js <code>libuv</code> event loop handling asynchronous REST API requests, rate-limiting windows, and MySQL connection pool query resolutions.
+  </div>
+
+  <div class="section-title">Interoperability</div>
+  <div class="prompt">Do you use the API https://marcconrad.com/uob/tomato/api.php?<br>If no, where in your code do you demonstrate interoperability? What protocols do you use?</div>
+  <div class="answer">
+    No. Instead of the Tomato API, I interoperate with Marc Conrad’s official <strong>Banana API</strong> (<code>https://marcconrad.com/uob/banana/api.php?out=json</code>) inside <code>backend/src/services/bananaService.js</code>.
+    <br>• <strong>Protocol:</strong> HTTPS RESTful protocol exchanging JSON payloads.
+    <br>• <strong>Anti-Cheat Data Isolation:</strong> The external web service returns both the puzzle image and the plain solution integer (<code>{ question, solution }</code>). Direct client-side calls would leak the answer in browser DevTools. My Express backend interoperates with the external API server-to-server, withholds the solution securely in the database, and serves only a sanitized round payload to the React client.
+    <br>• <strong>Fault Tolerance:</strong> Includes an AbortController (6s timeout) and a local procedural SVG equation generator if the external web service is unreachable.
+  </div>
+
+  <div class="section-title">Virtual Identity</div>
+  <div class="prompt">How did you implement virtual identity in your code? (e.g., Passwords, Cookies, IP Numbers …)</div>
+  <div class="answer">
+    Virtual identity is mandatory to access game sessions and record scores (enforced by <code>authMiddleware.js</code>):
+    <br>• <strong>Password Protection:</strong> Passwords are never stored in plaintext; they are salted and hashed using <code>bcryptjs</code> (cost factor 10) to protect against rainbow table attacks.
+    <br>• <strong>Stateless Session Tokens:</strong> Authenticated users receive an HMAC-SHA256 signed JSON Web Token (JWT) transmitted via HTTP <code>Authorization: Bearer &lt;token&gt;</code> headers.
+    <br>• <strong>Relational Persistence:</strong> Identities are persisted in MySQL 8.0 (<code>users</code> table linked with <code>user_stats</code> and <code>match_history</code>), supporting custom avatars, win rates, high streaks, and audited match histories that power the dynamic leaderboard.
+  </div>
+
+  <div class="section-title">Any other interesting features:</div>
+  <div class="answer">
+    (1) <strong>Zero Data Leak Architecture:</strong> Anti-cheat proxy withholds solutions; verification occurs strictly server-side.
+    (2) <strong>3-Step Tactical Hints:</strong> Progressive clues (Parity/Range → Set Elimination → Boundary Clue) without revealing the solution.
+    (3) <strong>Dynamic Point Calculus:</strong> Rewards speed (+time bonus) and accuracy (× streak multipliers up to 2.0x) while deducting hint penalties.
+    (4) <strong>Haptic Vibration & Confetti FX:</strong> Combines physical mobile vibration (<code>navigator.vibrate</code>) with celebratory particle animations.
+    (5) <strong>Real-Time Dynamic MySQL Leaderboard:</strong> Live SQL queries for Top Scorers and Accuracy % (not hardcoded).
+    (6) <strong>1-Click Launcher:</strong> <code>start-game.bat</code> automatically launches the backend, frontend, and opens the browser in one step.
+  </div>
+
+</body>
+</html>
